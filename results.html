@@ -1,0 +1,281 @@
+<title>Consensus Prior Results</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one reading column, status strip up top, each question a section with a verdict line and evidence tables. */
+:root{
+  --bg:#f6f7f8; --surface:#ffffff; --fg:#16202a; --muted:#5a6774; --line:#dde2e7;
+  --accent:#0f6e74; --accent-soft:#e2f0f0;
+  --ok:#1f7a3f; --ok-bg:#e3f2e8; --warn:#9a5b00; --warn-bg:#fbefd9; --bad:#a3261f; --bad-bg:#f8e3e1; --idle:#56616d; --idle-bg:#e8ebee;
+  --sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#10161c; --surface:#161e26; --fg:#e3e9ee; --muted:#93a1ad; --line:#2a3540;
+  --accent:#5cc4c9; --accent-soft:#16343a;
+  --ok:#6fd08f; --ok-bg:#173324; --warn:#f0b75c; --warn-bg:#3a2b12; --bad:#f08a80; --bad-bg:#3d1c1a; --idle:#a3afba; --idle-bg:#232d36; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#10161c; --surface:#161e26; --fg:#e3e9ee; --muted:#93a1ad; --line:#2a3540;
+  --accent:#5cc4c9; --accent-soft:#16343a;
+  --ok:#6fd08f; --ok-bg:#173324; --warn:#f0b75c; --warn-bg:#3a2b12; --bad:#f08a80; --bad-bg:#3d1c1a; --idle:#a3afba; --idle-bg:#232d36; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:16px/1.55 var(--sans);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:40px 64px}
+main{max-width:860px;margin:0 auto;display:grid;gap:44px}
+h1,h2,h3{text-wrap:balance;line-height:1.2;margin:0}
+h1{font-size:2rem;font-weight:700;letter-spacing:-.01em}
+h2{font-size:1.4rem;font-weight:650;display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+h3{font-size:1.02rem;font-weight:600}
+p{margin:0;max-width:68ch}
+section{display:grid;gap:16px}
+.qid{font:500 .85rem var(--mono);color:var(--accent)}
+.lede{color:var(--muted);max-width:68ch}
+.verdict{border-left:3px solid var(--accent);padding:10px 14px;background:var(--accent-soft);border-radius:0 6px 6px 0;font-weight:500;max-width:72ch}
+ul{margin:0;padding-left:1.2em;display:grid;gap:6px;max-width:72ch}
+code,.mono{font-family:var(--mono);font-size:.86em}
+.pill{display:inline-block;font:600 .72rem var(--sans);letter-spacing:.05em;text-transform:uppercase;padding:3px 8px;border-radius:999px;white-space:nowrap}
+.done{color:var(--ok);background:var(--ok-bg)} .part{color:var(--warn);background:var(--warn-bg)} .none{color:var(--bad);background:var(--bad-bg)} .idle{color:var(--idle);background:var(--idle-bg)}
+.strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.cell{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px;display:grid;gap:6px;min-width:0}
+.cell b{font:500 .8rem var(--mono);color:var(--accent)}
+.cell span.t{font-size:.9rem;line-height:1.35}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.88rem;font-variant-numeric:tabular-nums}
+th,td{padding:7px 10px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+td.w{white-space:normal;min-width:220px}
+th{font-weight:600;color:var(--muted);font-size:.76rem;letter-spacing:.04em;text-transform:uppercase}
+tr:last-child td{border-bottom:0}
+td.n{text-align:right;font-family:var(--mono);font-size:.82rem}
+tr.sig td{font-weight:600}
+.fig{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px;overflow-x:auto}
+.fig svg{display:block;min-width:560px;width:100%;height:auto}
+.fig text{fill:var(--fg);font-family:var(--sans);font-size:12px}
+.fig .ax{fill:var(--muted);font-family:var(--mono);font-size:10.5px}
+.cap{color:var(--muted);font-size:.86rem;max-width:72ch}
+.gap{display:grid;gap:10px}
+.g{display:grid;grid-template-columns:92px 1fr;gap:12px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+.g>div{min-width:0;display:grid;gap:4px}
+.g p{font-size:.93rem}
+.g .fix{color:var(--muted)}
+hr{border:0;border-top:1px solid var(--line);margin:0}
+footer{color:var(--muted);font-size:.85rem}
+@media (max-width:520px){.g{grid-template-columns:1fr}h1{font-size:1.6rem}}
+</style>
+
+<main>
+<header style="display:grid;gap:12px">
+  <div class="qid">research/consensus · 24 Nov 2026</div>
+  <h1>Consensus Prior Results</h1>
+  <p class="lede">Goal: AI that judges a claim by whether it checks, not by whether it agrees with consensus, and revises broken assumptions in a way it can account for. End test: a model blind to the answer reaches a discovery that overturned its era's consensus.</p>
+</header>
+
+<section>
+  <h2>Status</h2>
+  <div class="strip">
+    <div class="cell"><b>Q2 protection</b><span class="pill done">Replicated</span><span class="t">gpt-oss-120b bias holds on 200 held-out items; 14 models scored.</span></div>
+    <div class="cell"><b>Q3 ledger</b><span class="pill done">4 checkers</span><span class="t">JTMS core proved unbounded; ATMS labels bounded only.</span></div>
+    <div class="cell"><b>Q4 cutoff</b><span class="pill none">Not started</span><span class="t">Plan and pilot only.</span></div>
+    <div class="cell"><b>Q6 recheck</b><span class="pill part">Baselines</span><span class="t">Gap measured; the cache is not built.</span></div>
+    <div class="cell"><b>Q7 scoring</b><span class="pill part">Prototype</span><span class="t">Pipeline works; test domain still needed.</span></div>
+  </div>
+  <p class="cap">Running: Q2 replication on Sophia (Kimi K2.6).</p>
+</section>
+
+<hr>
+
+<section>
+  <h2><span class="qid">Q2</span>Do models protect reputable assumptions?</h2>
+  <p>When a reliable observation contradicts a theory and several minimal fixes are valid, does a model give up the assumption with a made-up name before the one with a famous name? 50 z3-generated items, each with at least 3 minimal correction sets. Two target rules per item carry a famous name (F), an invented eponym of the same form (O), or no name (N). 1,000 completions per model.</p>
+  <div class="verdict">Reputation bias is real in some models and absent in others. On 200 held-out items gpt-oss-120b protects famous names (+0.15), and Beam 1.0, Nemotron 3 Ultra, Mistral Medium 3.5, Gemma 4 and Muse Spark do so weakly (+0.04 to +0.06), Qwen3.8-Flash-Next barely (+0.03). gpt-oss-20b, Mistral Large 4, Qwen3.8-27B and Inkling-2-small protect any name equally. Inkling goes the other way and protects made-up names (−0.09). Claude Opus 5.5 and Sonnet 5.5 protect any name most strongly of all (+0.17) with no reputation bias; the pilot’s Opus reverse bias does not replicate.</div>
+
+  <div class="fig" role="img" aria-label="Reputation bias with 95% confidence intervals for eleven models">
+    <svg id="forest" viewBox="0 0 760 330"></svg>
+  </div>
+  <p class="cap">Reputation bias = Δ_F − Δ_O, valid-minimal answers, 95% bootstrap CI over items (10,000 resamples). Right of zero: famous names protected more than invented ones. Llama-3.1-8B is left out (11 valid items, CI −0.34 to +0.30).</p>
+
+  <div class="tbl"><table>
+    <thead><tr><th>Model</th><th>Run</th><th>Valid-min</th><th>Δ_F famous</th><th>Δ_O invented</th><th>Bias</th><th>Items</th></tr></thead>
+    <tbody>
+      <tr class="sig"><td>gpt-oss-120b</td><td>Sophia</td><td class="n">99.3%</td><td class="n">+0.048</td><td class="n">−0.078</td><td class="n">+0.126 [+0.04, +0.21]</td><td class="n">50</td></tr>
+      <tr><td>GLM-5</td><td>Bedrock</td><td class="n">85.1%</td><td class="n">+0.036</td><td class="n">−0.045</td><td class="n">+0.077 [−0.02, +0.18]</td><td class="n">49</td></tr>
+      <tr><td>DeepSeek V3.2</td><td>Bedrock</td><td class="n">100%</td><td class="n">+0.070</td><td class="n">+0.005</td><td class="n">+0.065 [−0.03, +0.16]</td><td class="n">50</td></tr>
+      <tr><td>Gemma 4 31B</td><td>Sophia</td><td class="n">94.6%</td><td class="n">+0.036</td><td class="n">+0.013</td><td class="n">+0.023 [−0.03, +0.08]</td><td class="n">50</td></tr>
+      <tr><td>gpt-oss-20b</td><td>Sophia</td><td class="n">98.3%</td><td class="n">+0.069</td><td class="n">+0.066</td><td class="n">+0.003 [−0.07, +0.07]</td><td class="n">50</td></tr>
+      <tr><td>Qwen3.8-27B</td><td>Sophia, 32k</td><td class="n">99.9%</td><td class="n">+0.105</td><td class="n">+0.108</td><td class="n">−0.003 [−0.04, +0.03]</td><td class="n">50</td></tr>
+      <tr><td>Claude Fable 5.2</td><td>Batches</td><td class="n">100%</td><td class="n">+0.090</td><td class="n">+0.113</td><td class="n">−0.023 [−0.05, +0.00]</td><td class="n">50</td></tr>
+      <tr><td>Kimi K2 Thinking</td><td>Bedrock, 64k</td><td class="n">99.9%</td><td class="n">+0.046</td><td class="n">+0.070</td><td class="n">−0.024 [−0.07, +0.02]</td><td class="n">50</td></tr>
+      <tr><td>Qwen3.6-27B</td><td>Sophia, 32k</td><td class="n">75.8%</td><td class="n">+0.037</td><td class="n">+0.049</td><td class="n">−0.039 [−0.09, +0.01]</td><td class="n">39</td></tr>
+      <tr class="sig"><td>Claude Opus 5.5</td><td>Batches</td><td class="n">99.9%</td><td class="n">+0.118</td><td class="n">+0.170</td><td class="n">−0.052 [−0.09, −0.02]</td><td class="n">50</td></tr>
+      <tr><td>Claude Sonnet 5.5</td><td>Batches</td><td class="n">100%</td><td class="n">+0.110</td><td class="n">+0.188</td><td class="n">−0.078 [−0.17, +0.00]</td><td class="n">50</td></tr>
+      <tr><td>Llama-3.1-8B</td><td>Sophia</td><td class="n">23.3%</td><td class="n">−0.058</td><td class="n">−0.080</td><td class="n">−0.008 [−0.34, +0.30]</td><td class="n">11</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Pilot findings</h3>
+  <ul>
+    <li><b>gpt-oss-120b</b> gets its bias mostly from giving up the invented-name assumption more often (Δ_O −0.08), not from guarding the famous one.</li>
+    <li><b>Claude Fable 5.2, Opus 5.5 and Sonnet 5.5</b> all lean against reputation. Only Opus clears significance; the other two touch zero at the upper bound.</li>
+    <li><b>Any name protects.</b> Qwen3.8, gpt-oss-20b, Kimi and all three Claude models protect named assumptions with no reputation term.</li>
+    <li><b>Truncation biases the score.</b> At 16k tokens Kimi ran out 2.5× as often under a name (16%) as with none (6.5%). Rerun at 64k: bias −0.04 → −0.02, valid-minimal 85.6% → 99.9%.</li>
+    <li><b>Twelve models at 95%</b> produce about one significant result by chance, so the pilot needed held-out items. The replication below supplies them.</li>
+  </ul>
+
+  <h3>Replication: 200 held-out items</h3>
+  <p>New items from the same generator (seed 1, 50 per family, none shared with the pilot), same five conditions, 4 samples per prompt, 4,000 completions per model. Hypotheses were committed before any output (<code>q2-protection/replication.md</code>). Open-weight models only, at no cost: Sophia with vLLM, and ALCF Inference Endpoints on B200 and GH200 for models A100s cannot run.</p>
+  <div class="fig" role="img" aria-label="Replication reputation bias with 95% confidence intervals for fourteen models">
+    <svg id="forest-rep" viewBox="0 0 760 240"></svg>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr><th>Model</th><th>Run</th><th>Valid-min</th><th>Δ_F famous</th><th>Δ_O invented</th><th>Bias</th><th>Pilot bias</th><th>Prediction</th></tr></thead>
+    <tbody>
+      <tr class="sig"><td>gpt-oss-120b</td><td>Sophia</td><td class="n">99.4%</td><td class="n">+0.110</td><td class="n">−0.038</td><td class="n">+0.148 [+0.10, +0.20]</td><td class="n">+0.126</td><td>Bias &gt; 0: replicates</td></tr>
+      <tr class="sig"><td>Beam 1.0</td><td>Endpoint, GH200</td><td class="n">100%</td><td class="n">+0.099</td><td class="n">+0.034</td><td class="n">+0.064 [+0.02, +0.11]</td><td class="n">—</td><td>New model</td></tr>
+      <tr class="sig"><td>Nemotron 3 Ultra</td><td>Endpoint, GH200, 64k</td><td class="n">99.7%</td><td class="n">+0.077</td><td class="n">+0.013</td><td class="n">+0.064 [+0.02, +0.10]</td><td class="n">—</td><td>New model</td></tr>
+      <tr class="sig"><td>Mistral Medium 3.5</td><td>Sophia, 2 nodes</td><td class="n">99.3%</td><td class="n">+0.142</td><td class="n">+0.098</td><td class="n">+0.044 [+0.01, +0.08]</td><td class="n">—</td><td>New model</td></tr>
+      <tr class="sig"><td>Gemma 4 31B</td><td>Sophia</td><td class="n">95.3%</td><td class="n">+0.036</td><td class="n">−0.007</td><td class="n">+0.043 [+0.01, +0.08]</td><td class="n">+0.023</td><td>No bias: fails</td></tr>
+      <tr class="sig"><td>Muse Spark</td><td>Endpoint, B200</td><td class="n">100%</td><td class="n">+0.080</td><td class="n">+0.041</td><td class="n">+0.039 [+0.01, +0.07]</td><td class="n">—</td><td>New model</td></tr>
+      <tr class="sig"><td>Qwen3.8-Flash-Next</td><td>Sophia, 2 nodes</td><td class="n">99.9%</td><td class="n">+0.158</td><td class="n">+0.129</td><td class="n">+0.029 [+0.00, +0.06]</td><td class="n">—</td><td>New model</td></tr>
+      <tr><td>gpt-oss-20b</td><td>Sophia</td><td class="n">98.7%</td><td class="n">+0.081</td><td class="n">+0.054</td><td class="n">+0.027 [−0.01, +0.07]</td><td class="n">+0.003</td><td>Name effect, no bias: replicates</td></tr>
+      <tr><td>Mistral Large 4</td><td>Endpoint, GH200, 64k</td><td class="n">99.9%</td><td class="n">+0.100</td><td class="n">+0.081</td><td class="n">+0.020 [−0.00, +0.04]</td><td class="n">—</td><td>New model</td></tr>
+      <tr><td>Inkling-2-small</td><td>Endpoint, B200</td><td class="n">100%</td><td class="n">+0.072</td><td class="n">+0.069</td><td class="n">+0.004 [−0.04, +0.05]</td><td class="n">—</td><td>New model</td></tr>
+      <tr><td>Qwen3.8-27B</td><td>Sophia, 32k</td><td class="n">99.8%</td><td class="n">+0.103</td><td class="n">+0.114</td><td class="n">−0.012 [−0.04, +0.01]</td><td class="n">−0.003</td><td>Name effect, no bias: replicates</td></tr>
+      <tr class="sig"><td>Inkling</td><td>Endpoint, GH200</td><td class="n">100%</td><td class="n">−0.007</td><td class="n">+0.086</td><td class="n">−0.092 [−0.13, −0.05]</td><td class="n">—</td><td>New model</td></tr>
+      <tr><td>Claude Opus 5.5</td><td>Subagents</td><td class="n">95.7%</td><td class="n">+0.169</td><td class="n">+0.170</td><td class="n">−0.002 [−0.02, +0.01]</td><td class="n">−0.052</td><td>Not preregistered; pilot bias does not hold</td></tr>
+      <tr><td>Claude Sonnet 5.5</td><td>Subagents</td><td class="n">99.8%</td><td class="n">+0.162</td><td class="n">+0.173</td><td class="n">−0.011 [−0.03, +0.01]</td><td class="n">−0.078</td><td>Not preregistered</td></tr>
+    </tbody>
+  </table></div>
+  <ul>
+    <li><b>gpt-oss-120b's bias replicates</b> and is now driven by protecting famous names (Δ_F +0.11; +0.12 against no name), not only by dropping invented ones. The CI is half the pilot's width.</li>
+    <li><b>Gemma 4 fails its prediction.</b> 200 items resolve the pilot's positive lean (+0.02) into a small bias (+0.04).</li>
+    <li><b>Two more models favour famous names.</b> Nemotron 3 Ultra (+0.064) protects famous names and not invented ones; Mistral Medium 3.5 (+0.044) protects both, famous ones more. Both are above zero in all four samples. Nemotron used up its 32k budget reasoning on 527 prompts with no answer (Mistral Large 4 on 327); those were rerun at 64k and 11 (4) still ran out. Mistral Large 4 protects both kinds of name with no reputation bias (+0.020 [−0.002, +0.042]).</li>
+    <li><b>Qwen3.8-Flash-Next sits on the edge.</b> Famous and invented names each add +0.15 over no name; in the direct swap famous names win by +0.029 [+0.001, +0.058], positive in all four samples. Its sibling Qwen3.8-27B shows none.</li>
+    <li><b>Inkling protects invented names over famous ones</b> (−0.092, below zero in all four samples); Inkling-2-small does not. Claude’s pilot reverse bias came back in the first subagent sample (Sonnet −0.048) and vanished in the next three (−0.003 to +0.024). Pooled, both Claude models protect any named assumption more strongly than any open model (+0.16 to +0.17) with no reputation term.</li>
+    <li><b>Claude ran as Claude Code subagents, not through the API.</b> 40 agents each answered one file of 50 prompts from 50 different items, so none saw two conditions of one item. 4 samples per prompt, item grouping reshuffled each sample, under the Claude Code system prompt with model-chosen reasoning: close to, not the same as, the pilot setup.</li>
+    <li><b>Endpoint data needed cleaning.</b> The ALCF gateway wrote its own error text into 1,029 Muse Spark streams as if it were an answer; those rows were dropped and rerun. Streams that cut off are retried; requests lost after 8 tries are logged in <code>out/*.fail.jsonl</code> (8 so far, almost all Mistral Large 4).</li>
+    <li><b>Still running:</b> Kimi K2.6 on Sophia.</li>
+  </ul>
+
+  <h3>Models that could not run</h3>
+  <ul>
+    <li>GLM-5.3-Flash and DeepSeek V4.1 Flash use sparse indexer attention; every vLLM 0.34 sparse-MLA backend requires SM90+. Sophia and Polaris are A100 (SM80).</li>
+    <li>Inkling-Small fails on A100 (FlexAttention <code>score_mod</code> unsupported on SM8x). Inkling and Inkling-2-small run through ALCF Inference Endpoints instead.</li>
+    <li>GLM-5.3 on Bedrock requires an AWS Sales request.</li>
+  </ul>
+</section>
+
+<hr>
+
+<section>
+  <h2><span class="qid">Q3</span>Can an assumption ledger be verified across proof systems?</h2>
+  <p>One spec (<code>spec.md</code>): assert, justify, retract, with closure and an append-only log. Checked by TLC, Apalache, Lean 4 and Dafny, each against the correct ledger and two broken controls: <i>naive</i> (Doyle's JTMS without well-founded support) and <i>noseed</i> (retraction without re-seeding enabled assumptions).</p>
+  <div class="verdict">The JTMS core is proved for unbounded ledgers in Lean and Dafny. The full ATMS label semantics is model-checked only within 5 nodes, 2 assumptions and 3 rules. All four systems catch both control bugs, and none finds a bug in the correct ledger.</div>
+  <div class="tbl"><table>
+    <thead><tr><th>System</th><th>Covers</th><th>Bound</th><th>Controls caught</th><th>Cost</th></tr></thead>
+    <tbody>
+      <tr><td>TLC</td><td class="w">JTMS + full ATMS labels (L1–L5), log replay</td><td>5 nodes, 2.6M states</td><td>both, 11 s and 1m56s</td><td class="n">4m14s</td></tr>
+      <tr><td>Apalache</td><td class="w">JTMS invariant inductive (IndJ); label inductive check open</td><td>any depth, fixed nodes</td><td>both, 51 and 74 min</td><td class="n">11–48 min/check</td></tr>
+      <tr><td>Lean 4</td><td class="w">JTMS: live support, completeness, retraction closure, log append</td><td>unbounded</td><td>both</td><td class="n">3.2 s</td></tr>
+      <tr><td>Dafny</td><td class="w">Same JTMS core, 14 obligations</td><td>unbounded</td><td>both (noseed statically)</td><td class="n">1.4 s</td></tr>
+    </tbody>
+  </table></div>
+  <ul>
+    <li>The naive bug's shape depends on the execution model. Interleaved TLC re-derives the retracted assumption through itself (<code>a ← F ← a</code>); eager-cleanup Lean and Dafny need the textbook cycle that avoids it (<code>x ↔ y</code>).</li>
+    <li>Dafny took 1 attempt, Lean 5, TLC 3. Apalache took 4 runs to parse and was 26× to 400× slower than TLC at finding the same bugs.</li>
+  </ul>
+</section>
+
+<hr>
+
+<section>
+  <h2><span class="qid">Q4</span>Can a time-sliced model reach a later discovery?</h2>
+  <p>Train from scratch only on text before 1880, 1900, 1905 and 1915, with no post-cutoff text in any stage. Ask open-ended derivation tasks graded by code: black-body law, photoelectric law, Lorentz transformation, simultaneity. A result counts only above a symbolic-regression enumerator with the same budget, and only if it is weaker or absent at 1880 and survives paraphrase.</p>
+  <div class="verdict">Plan, corpus design and throughput pilot are done; no training run has started. The schedule put the audited 1900 corpus, FSDP port and first 1B runs in 22 Nov – 1 Dec.</div>
+  <div class="tbl"><table>
+    <thead><tr><th>Polaris pilot</th><th>Nodes</th><th>Params</th><th>tok/s per node</th><th>MFU</th></tr></thead>
+    <tbody>
+      <tr><td>nanochat d20</td><td class="n">1</td><td class="n">0.90B</td><td class="n">243,938</td><td class="n">56%</td></tr>
+      <tr><td>nanochat d26</td><td class="n">1</td><td class="n">1.68B</td><td class="n">115,414</td><td class="n">55%</td></tr>
+      <tr><td>nanochat d26</td><td class="n">2</td><td class="n">1.68B</td><td class="n">92,316</td><td class="n">44%</td></tr>
+      <tr><td>nanochat d34</td><td class="n">1–2</td><td class="n">3.29B</td><td>OOM on A100-40GB</td><td>—</td></tr>
+    </tbody>
+  </table></div>
+  <ul>
+    <li>Plan: 2,153 of 4,765 Polaris node-hours (1B ×2 seeds and 3B per cutoff, leak-injection control, post-training, eval). Pilot used 0.63.</li>
+    <li>The 3B model needs an FSDP port (budgeted at 30 node-hours). Two-node scaling is 80%, with GPUDirect RDMA off in the NCCL plugin.</li>
+    <li>Corpus: AmericanStories + Institutional Books + British Library, ~40–50B tokens before 1900 after filters. Institutional Books requires contacting IDI before commercial training. AmericanStories + BL carry the 1B runs without it.</li>
+  </ul>
+</section>
+
+<hr>
+
+<section>
+  <h2><span class="qid">Q6</span>Can rechecking scale with the change instead of the program?</h2>
+  <div class="verdict">Module-level caching puts a one-line Mathlib change at 0.07% or 88% of a full build, depending only on whether it touches the public interface. Kernel-only re-check costs 3.9% of a build. Greedy decoding reproduces bit for bit across machines once batch composition is in the key.</div>
+  <div class="tbl"><table>
+    <thead><tr><th>Mathlib v4.33.0 run</th><th>Modules rebuilt</th><th>CPU</th><th>Share of full</th></tr></thead>
+    <tbody>
+      <tr><td>Full build</td><td class="n">8,312</td><td class="n">8.9 h</td><td class="n">100%</td></tr>
+      <tr><td>One-line proof edit</td><td class="n">1</td><td class="n">21 s</td><td class="n">0.07%</td></tr>
+      <tr><td>Append one unused public lemma</td><td class="n">6,840</td><td class="n">7.8 h</td><td class="n">88%</td></tr>
+      <tr><td>Kernel replay, all of Mathlib, 1 thread</td><td class="n">all</td><td class="n">21 min</td><td class="n">3.9%</td></tr>
+    </tbody>
+  </table></div>
+  <ul>
+    <li>Llama-3.1-8B greedy on A100: 24 of 24 same-config comparisons match on every token and logit bit, run to run and Sophia to Polaris. Changing only the batch diverges by token 26–29 on half the prompts.</li>
+    <li>vLLM 0.12.0 batch-invariant mode is not batch-invariant on A100.</li>
+    <li>HF and vLLM disagree on 5 of 8 greedy outputs from identical token ids.</li>
+    <li>Thesis: cache the search output (proof term, simulation witness) untrusted, re-run only the checker, and key each verdict on the hash of the recorded read set. Negative lookups and index queries (simp sets, instance tables) are part of that set.</li>
+  </ul>
+</section>
+
+<hr>
+
+<section>
+  <h2><span class="qid">Q7</span>Can assumptions be ranked by proper scores instead of consensus?</h2>
+  <p>Six assumptions about 24-hour BTC moves, each compiled to a forecast for 968 resolved Polymarket strike markets (92 days, July–November 2025), scored by log score against the market price.</p>
+  <div class="verdict">The pipeline from assumption to forecast to proper score to credence works with no popularity input. In this domain the market is efficient, so the consensus ranking and the proper-score ranking mostly agree.</div>
+  <div class="tbl"><table>
+    <thead><tr><th>Assumption</th><th>Log score, all strikes</th><th>Δ vs market</th><th>Credence</th></tr></thead>
+    <tbody>
+      <tr><td>market (consensus)</td><td class="n">−0.165</td><td class="n">0</td><td>—</td></tr>
+      <tr><td>random walk</td><td class="n">−0.168</td><td class="n">−0.003 [−0.009, +0.003]</td><td class="n">0.91</td></tr>
+      <tr><td>fat tails</td><td class="n">−0.170</td><td class="n">−0.005 [−0.014, +0.003]</td><td class="n">0.08</td></tr>
+      <tr><td>volatility clustering</td><td class="n">−0.172</td><td class="n">−0.008 [−0.017, +0.002]</td><td class="n">0.01</td></tr>
+      <tr><td>trend</td><td class="n">−0.217</td><td class="n">−0.052 [−0.086, −0.018]</td><td class="n">2e−21</td></tr>
+      <tr><td>mean reversion</td><td class="n">−0.261</td><td class="n">−0.096 [−0.136, −0.060]</td><td class="n">4e−40</td></tr>
+      <tr><td>status quo</td><td class="n">−0.333</td><td class="n">−0.168 [−0.215, −0.124]</td><td class="n">3e−70</td></tr>
+    </tbody>
+  </table></div>
+  <ul>
+    <li>One significant disagreement: closeness to consensus ranks status quo above mean reversion; proper scoring ranks it last. Status quo was closer to the outcome on 156 of 216 contested questions and still lost 0.73 nats per question.</li>
+    <li>92 days separate wrong assumptions at ~0.05 nats per question, not near-equivalent ones at ~0.01.</li>
+  </ul>
+</section>
+
+<footer>Sources: <code>q2-protection/results.md</code>, <code>q2-protection/replication.md</code>, <code>q3-ledger/results.md</code>, <code>q4-cutoff/plan.md</code>, <code>q6-recheck/baseline.md</code>, <code>q6-recheck/determinism.md</code>, <code>q7-scoring/results.md</code>.</footer>
+</main>
+
+<script>
+(function(){
+  function forest(id,d){
+    var s=document.getElementById(id),NS="http://www.w3.org/2000/svg",L=170,R=740,T=14,rh=26,lo=-.2,hi=.25;
+    function x(v){return L+(v-lo)/(hi-lo)*(R-L)}
+    function el(n,a,t){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(t!=null)e.textContent=t;s.appendChild(e);return e}
+    var H=T+d.length*rh;
+    [-.2,-.1,0,.1,.2].forEach(function(v){
+      el("line",{x1:x(v),x2:x(v),y1:T-6,y2:H,stroke:"var(--line)","stroke-width":v===0?1.6:1,"stroke-dasharray":v===0?"":"3 4"});
+      el("text",{x:x(v),y:H+18,"text-anchor":"middle","class":"ax"},(v>0?"+":v<0?"−":"")+Math.abs(v).toFixed(1));
+    });
+    el("text",{x:x(lo),y:H+36,"class":"ax"},"← invented names protected more");
+    el("text",{x:x(hi),y:H+36,"text-anchor":"end","class":"ax"},"famous names protected more →");
+    d.forEach(function(r,i){
+      var y=T+i*rh+rh/2,sig=r[2]>0||r[3]<0,c=sig?"var(--accent)":"var(--muted)";
+      el("text",{x:L-12,y:y+4,"text-anchor":"end","font-weight":sig?"600":"400"},r[0]);
+      el("line",{x1:x(r[2]),x2:x(r[3]),y1:y,y2:y,stroke:c,"stroke-width":2});
+      el("circle",{cx:x(r[1]),cy:y,r:sig?5:4,fill:c});
+    });
+    s.setAttribute("viewBox","0 0 760 "+(H+44));
+  }
+  forest("forest",[["gpt-oss-120b",.126,.04,.21],["GLM-5",.077,-.02,.18],["DeepSeek V3.2",.065,-.03,.16],["Gemma 4 31B",.023,-.03,.08],["gpt-oss-20b",.003,-.07,.07],["Qwen3.8-27B",-.003,-.04,.03],["Claude Fable 5.2",-.023,-.05,0],["Kimi K2 Thinking",-.024,-.07,.02],["Qwen3.6-27B",-.039,-.09,.01],["Claude Opus 5.5",-.052,-.09,-.02],["Claude Sonnet 5.5",-.078,-.17,0]]);
+  forest("forest-rep",[["gpt-oss-120b",.148,.10,.20],["Beam 1.0",.064,.02,.11],["Nemotron 3 Ultra",.064,.02,.10],["Mistral Medium 3.5",.044,.01,.08],["Gemma 4 31B",.043,.01,.08],["Muse Spark",.039,.01,.07],["Qwen3.8-Flash-Next",.029,.001,.058],["gpt-oss-20b",.027,-.01,.07],["Mistral Large 4",.020,-.002,.042],["Inkling-2-small",.004,-.04,.05],["Qwen3.8-27B",-.012,-.04,.01],["Inkling",-.092,-.13,-.05],["Claude Opus 5.5",-.002,-.02,.01],["Claude Sonnet 5.5",-.011,-.03,.01]]);
+})();
+</script>

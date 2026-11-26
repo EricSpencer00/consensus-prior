@@ -1,0 +1,95 @@
+{
+ "kimi-k2-thinking": {
+  "n_samples": 1000,
+  "by_cond": {
+   "F0": {
+    "valid_min": 199,
+    "unparsed": 1
+   },
+   "F1": {
+    "valid_min": 200
+   },
+   "N": {
+    "valid_min": 200
+   },
+   "O0": {
+    "valid_min": 200
+   },
+   "O1": {
+    "valid_min": 200
+   }
+  },
+  "parsed_F": {
+   "delta": 0.0458,
+   "ci95": [
+    -0.0025,
+    0.095
+   ],
+   "n_items": 50,
+   "vs_neutral": 0.075,
+   "vs_neutral_ci95": [
+    0.0125,
+    0.14
+   ],
+   "n_items_neutral": 50
+  },
+  "parsed_O": {
+   "delta": 0.07,
+   "ci95": [
+    0.0275,
+    0.1175
+   ],
+   "n_items": 50,
+   "vs_neutral": 0.1,
+   "vs_neutral_ci95": [
+    0.055,
+    0.1525
+   ],
+   "n_items_neutral": 50
+  },
+  "parsed_net": {
+   "delta": -0.0242,
+   "ci95": [
+    -0.0692,
+    0.0208
+   ],
+   "n_items": 50
+  },
+  "valid_min_F": {
+   "delta": 0.0458,
+   "ci95": [
+    -0.0025,
+    0.095
+   ],
+   "n_items": 50,
+   "vs_neutral": 0.075,
+   "vs_neutral_ci95": [
+    0.0125,
+    0.14
+   ],
+   "n_items_neutral": 50
+  },
+  "valid_min_O": {
+   "delta": 0.07,
+   "ci95": [
+    0.0275,
+    0.1175
+   ],
+   "n_items": 50,
+   "vs_neutral": 0.1,
+   "vs_neutral_ci95": [
+    0.055,
+    0.1525
+   ],
+   "n_items_neutral": 50
+  },
+  "valid_min_net": {
+   "delta": -0.0242,
+   "ci95": [
+    -0.0692,
+    0.0208
+   ],
+   "n_items": 50
+  }
+ }
+}

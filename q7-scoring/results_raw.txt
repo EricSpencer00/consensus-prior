@@ -1,0 +1,68 @@
+
+## Primary (nearest-the-money strike, one per day): 92 questions, 92 days, base rate 0.500
+
+| forecaster | mean log score | Δ vs market (95% CI) | mean Brier | P(best assumption) | mean abs gap to market |
+|---|---|---|---|---|---|
+| market | -0.6118 | +0.0000 (+0.0000, +0.0000) | 0.2127 | nan | 0.000 |
+| fat_tails | -0.6123 | -0.0005 (-0.0339, +0.0293) | 0.2136 | 0.662 | 0.057 |
+| random_walk | -0.6192 | -0.0074 (-0.0294, +0.0140) | 0.2156 | 0.249 | 0.043 |
+| vol_clustering | -0.6304 | -0.0186 (-0.0458, +0.0076) | 0.2207 | 0.088 | 0.047 |
+| trend | -0.8795 | -0.2677 (-0.4711, -0.0718) | 0.2766 | 0.002 | 0.246 |
+| mean_reversion | -0.8997 | -0.2879 (-0.4501, -0.1405) | 0.3148 | 0.000 | 0.228 |
+| status_quo | -1.7082 | -1.0965 (-1.5164, -0.7022) | 0.3623 | 0.000 | 0.372 |
+
+Posterior credence (uniform prior, market excluded): fat_tails 0.582, random_walk 0.308, vol_clustering 0.11, trend 1.22e-11, mean_reversion 1.91e-12, status_quo 9.42e-45
+Consensus ranking (closest to market first): random_walk > vol_clustering > fat_tails > mean_reversion > trend > status_quo
+Proper-score ranking: fat_tails > random_walk > vol_clustering > trend > mean_reversion > status_quo
+
+## All strikes (day-block bootstrap): 968 questions, 92 days, base rate 0.418
+
+| forecaster | mean log score | Δ vs market (95% CI) | mean Brier | P(best assumption) | mean abs gap to market |
+|---|---|---|---|---|---|
+| market | -0.1647 | +0.0000 (+0.0000, +0.0000) | 0.0494 | nan | 0.000 |
+| random_walk | -0.1675 | -0.0028 (-0.0089, +0.0032) | 0.0499 | 0.662 | 0.019 |
+| fat_tails | -0.1699 | -0.0053 (-0.0144, +0.0031) | 0.0504 | 0.166 | 0.022 |
+| vol_clustering | -0.1721 | -0.0075 (-0.0173, +0.0016) | 0.0504 | 0.171 | 0.023 |
+| trend | -0.2166 | -0.0519 (-0.0864, -0.0183) | 0.0634 | 0.001 | 0.067 |
+| mean_reversion | -0.2610 | -0.0963 (-0.1358, -0.0603) | 0.0803 | 0.000 | 0.075 |
+| status_quo | -0.3328 | -0.1682 (-0.2146, -0.1240) | 0.0689 | 0.000 | 0.074 |
+
+Posterior credence (uniform prior, market excluded): random_walk 0.907, fat_tails 0.0828, vol_clustering 0.00977, trend 1.98e-21, mean_reversion 4.37e-40, status_quo 2.7e-70
+Consensus ranking (closest to market first): random_walk > fat_tails > vol_clustering > trend > status_quo > mean_reversion
+Proper-score ranking: random_walk > fat_tails > vol_clustering > trend > mean_reversion > status_quo
+
+## Paired log-score differences, Primary (95% day-block bootstrap CI)
+
+- fat_tails − random_walk: +0.0069 (-0.0178, +0.0303)
+- random_walk − vol_clustering: +0.0112 (-0.0139, +0.0416)
+- trend − mean_reversion: +0.0202 (-0.3267, +0.3477)
+- random_walk − trend: +0.2603 (+0.0690, +0.4794)
+- random_walk − status_quo: +1.0891 (+0.6815, +1.5015)
+
+Questions where an assumption departs from the market by more than 0.1:
+| assumption | n | assumption closer to outcome | mean log-score Δ vs market on these |
+|---|---|---|---|
+| random_walk | 4 | 1/4 | -0.166 |
+| trend | 71 | 40/71 | -0.336 |
+| mean_reversion | 69 | 28/69 | -0.379 |
+| status_quo | 91 | 57/91 | -1.109 |
+| fat_tails | 15 | 9/15 | -0.047 |
+| vol_clustering | 7 | 4/7 | -0.084 |
+
+## Paired log-score differences, All strikes (95% day-block bootstrap CI)
+
+- fat_tails − random_walk: -0.0025 (-0.0087, +0.0035)
+- random_walk − vol_clustering: +0.0047 (-0.0055, +0.0154)
+- trend − mean_reversion: +0.0444 (-0.0143, +0.1013)
+- random_walk − trend: +0.0491 (+0.0160, +0.0860)
+- random_walk − status_quo: +0.1654 (+0.1197, +0.2126)
+
+Questions where an assumption departs from the market by more than 0.1:
+| assumption | n | assumption closer to outcome | mean log-score Δ vs market on these |
+|---|---|---|---|
+| random_walk | 22 | 7/22 | -0.039 |
+| trend | 196 | 92/196 | -0.234 |
+| mean_reversion | 214 | 60/214 | -0.421 |
+| status_quo | 216 | 156/216 | -0.730 |
+| fat_tails | 48 | 34/48 | -0.029 |
+| vol_clustering | 48 | 25/48 | -0.120 |

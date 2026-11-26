@@ -1,0 +1,29 @@
+#!/bin/bash
+#PBS -N q2-protection
+#PBS -A <project>
+#PBS -q by-gpu
+#PBS -l select=1:ngpus=2:ncpus=32:mem=200gb
+#PBS -l place=pack:shared
+#PBS -l walltime=03:00:00
+#PBS -l filesystems=home:grand
+#PBS -j oe
+# Env: MODELS (space-separated names), TP (default 2), PROMPTS, TAG, LIMIT (smoke runs).
+set -uo pipefail
+W=$WORK/consensus/q2-protection
+cd $W
+export HF_HOME=$WORK/hf-cache HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
+export VLLM_WORKER_MULTIPROC_METHOD=spawn OMP_NUM_THREADS=4
+PY=$WORK/venvs/vllm-py313/bin/python
+TAG=${TAG:-full}
+mkdir -p out
+for m in $MODELS; do
+  case $m in
+    gpt-oss-120b) id=openai/gpt-oss-120b; extra="--max-tokens 12000 --gpu-util 0.90";;
+    gpt-oss-20b)  id=openai/gpt-oss-20b;  extra="--max-tokens 12000";;
+    qwen3.6-27b)  id=Qwen/Qwen3.6-27B;    extra="--max-tokens 32000 --max-len 36864 --temperature 0.6";;
+    qwen3.8-27b)  id=Qwen/Qwen3.8-27B;    extra="--max-tokens 32000 --max-len 36864 --temperature 0.6";;
+    gemma-4-31b)  id=google/gemma-4-31B-it; extra="--max-tokens 16000 --max-len 20480";;
+    llama-3.1-8b) id=meta-llama/Llama-3.1-8B-Instruct; extra="--max-tokens 3000";;
+  esac
+  $PY run.py --tp ${TP:-2} --prompts ${PROMPTS:-prompts.jsonl} --model $id --name $m --out out/$m.$TAG.jsonl --limit ${LIMIT:-0} $extra || echo "FAILED $m"
+done

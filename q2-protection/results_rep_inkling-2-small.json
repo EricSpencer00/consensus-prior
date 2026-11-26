@@ -1,0 +1,95 @@
+{
+ "inkling-2-small": {
+  "n_samples": 4000,
+  "by_cond": {
+   "F0": {
+    "valid_min": 800
+   },
+   "F1": {
+    "valid_min": 800
+   },
+   "N": {
+    "valid_min": 800
+   },
+   "O0": {
+    "valid_min": 799,
+    "unparsed": 1
+   },
+   "O1": {
+    "valid_min": 800
+   }
+  },
+  "parsed_F": {
+   "delta": 0.0725,
+   "ci95": [
+    0.0262,
+    0.1194
+   ],
+   "n_items": 200,
+   "vs_neutral": 0.0681,
+   "vs_neutral_ci95": [
+    0.0294,
+    0.1081
+   ],
+   "n_items_neutral": 200
+  },
+  "parsed_O": {
+   "delta": 0.0688,
+   "ci95": [
+    0.0281,
+    0.11
+   ],
+   "n_items": 200,
+   "vs_neutral": 0.0775,
+   "vs_neutral_ci95": [
+    0.0425,
+    0.1119
+   ],
+   "n_items_neutral": 200
+  },
+  "parsed_net": {
+   "delta": 0.0037,
+   "ci95": [
+    -0.0387,
+    0.0456
+   ],
+   "n_items": 200
+  },
+  "valid_min_F": {
+   "delta": 0.0725,
+   "ci95": [
+    0.0262,
+    0.1194
+   ],
+   "n_items": 200,
+   "vs_neutral": 0.0681,
+   "vs_neutral_ci95": [
+    0.0294,
+    0.1081
+   ],
+   "n_items_neutral": 200
+  },
+  "valid_min_O": {
+   "delta": 0.0688,
+   "ci95": [
+    0.0281,
+    0.11
+   ],
+   "n_items": 200,
+   "vs_neutral": 0.0775,
+   "vs_neutral_ci95": [
+    0.0425,
+    0.1119
+   ],
+   "n_items_neutral": 200
+  },
+  "valid_min_net": {
+   "delta": 0.0037,
+   "ci95": [
+    -0.0387,
+    0.0456
+   ],
+   "n_items": 200
+  }
+ }
+}

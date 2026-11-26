@@ -1,0 +1,111 @@
+{
+ "docs": 50000,
+ "chars": 1342894252,
+ "shards_written": 4,
+ "year_min": 1663,
+ "year_max": 1899,
+ "docs_by_decade": {
+  "1660": 4,
+  "1750": 1,
+  "1770": 5,
+  "1800": 98,
+  "1810": 48,
+  "1820": 850,
+  "1830": 1415,
+  "1840": 3067,
+  "1850": 5724,
+  "1860": 5954,
+  "1870": 9352,
+  "1880": 8781,
+  "1890": 14701
+ },
+ "docs_by_source": {
+  "institutional-books": 1957,
+  "AmericanStories": 48043
+ },
+ "docs_with_5plus_19xx_years": 0,
+ "strong_canary_docs": {
+  "\\bTitanic\\b": 112,
+  "\\bLeague of Nations\\b": 1,
+  "\\bproton\\b": 2,
+  "\\bBohr\\b": 2,
+  "\\bWorld War\\b": 1
+ },
+ "weak_canary_docs": {
+  "\\bether\\b": 914,
+  "\\bquant(um|a)\\b": 231,
+  "\\baether\\b": 72,
+  "\\bPlanck\\b": 16,
+  "\\brelativity\\b": 17,
+  "\\belectrons?\\b": 3,
+  "\\bLorentz\\b": 8,
+  "\\bX-rays?\\b": 10,
+  "\\bMichelson\\b": 3
+ },
+ "examples": {
+  "\\bTitanic\\b": [
+   {
+    "year": 1890,
+    "title": "Four great teachers: John Ruskin, Thomas Carlyle, Ralph Waldo Emerson, and Rober",
+    "source": "institutional-books",
+    "ctx": "\"\n\nIn the unconquerable spirit of faith, youth, and\n\nlove, Robert Browning reminds me of Victor\n\nHugo; and also for his Titanic strength and exquisite tenderness.\n\nThe following lines from the last gift of the poet to the world are full of the rarest insight and delicacy:-\n\n“What"
+   },
+   {
+    "year": 1898,
+    "title": "William Shakespeare, a study in Elizabethan literature,",
+    "source": "institutional-books",
+    "ctx": "ight, for all its recapitulation, one feels constant spontaneity, so in every line of Cymbeline one is somehow aware of Titanic effort.\n\nIn brief, then, Cymbeline seems the work of a consciously older man than the Shakspere whom we have known. As such, it takes a distinct place i"
+   },
+   {
+    "year": 1873,
+    "title": "Long Ago; a journal of popular antiquities...",
+    "source": "institutional-books",
+    "ctx": "der peculiar circum- are browsing on the sweet grasses unseen amid stances. A peasant was ploughing in a field when the Titanic stones. The flora is rare and beautiful. my lady was riding by on horseback. The plough- It is far better known than the archaeological feaman failed to"
+   }
+  ],
+  "\\bLeague of Nations\\b": [
+   {
+    "year": 1886,
+    "title": "Martinsburg independent. [volume] (Martinsburg, W. Va.) 1875-1900",
+    "source": "AmericanStories",
+    "ctx": "t re 60 the application Of the Sand witch l 1nd others, as more properly hol0ag.1 10 lha Pa III league OF republics The League OF Nations was formed later in the century. IL was the outgrowth of repubhcanisin. Standing armies became an uncomfortable burden. 1t was found that sixt"
+   }
+  ],
+  "\\bproton\\b": [
+   {
+    "year": 1857,
+    "title": "Sermons.",
+    "source": "institutional-books",
+    "ctx": "\n\nSCH WE FOU\n\nܡܐ ܠܡܐ ܫܐ ܒ ܐܘ ܝ ܡ ܠ 2 ܐ ܫ ܐ ܪܐ r irrt\n\nSpoondog or perm Lot Smal ܒܝ m : ܕ ܟܐ ܝ ܀\n\nFIDIG I LETA KOTÚT II PROTON 7 II\n\nܒܐ ܬܒܐ ܝ ܘ ܠ ܒ ܘ T ETܠܐܐ ܠ ܝ ܐܢܐ ܡܢ ܡ ܐܕ ܒܘܘ ܐܐ ܐ ܐܐ ܫܒ ܐ ܫ ܡ ܐܡ ܒܢ ܐ ܠܐ tr ܝ ܐܕ ܦܐܐܐ ܩ - ܪ ܢ ܐܝܬ ܡܚܐ ܪܣ ܡ : ܐܚܐ ܫܒ ܐܐ ܫܘܐ -eti ܐ ܐ ܐ ܘ ܐ ܐ ܘܢܩܩܬܐ ܠ"
+   },
+   {
+    "year": 1872,
+    "title": "The Canadian monthly and national review.",
+    "source": "institutional-books",
+    "ctx": "ese affrays seem, after a tortuous and tedious course, to have at last reached the place of their historic repose. The \"Proton outrage,\" though it has been allowed greatly to obstruct public business and has been made the subject of a solemn inquiry, is not deserving of serious n"
+   }
+  ],
+  "\\bBohr\\b": [
+   {
+    "year": 1842,
+    "title": "A grammar of the German language.",
+    "source": "institutional-books",
+    "ctx": "a doer or agent is occasionally applied, as in English, to an animal or instrument; as, Keil-e r, wild boar;\n\nSect. 2.\n\nBohr-e r, gimblet; Zeige r, index (point-er), Drei-e r, a coin worth three pfennigs. As er and fie sometimes signify a he-one and a she-one, so Kat-er is the ma"
+   },
+   {
+    "year": 1856,
+    "title": "New-York daily tribune.",
+    "source": "AmericanStories",
+    "ctx": " the whistle twice, which was TO So TO the left. The boats less than one hundrea yards apart, aud collision inevitable. Bohr reyerscd their engines and were backing when tsey struck, the bow Of the Howard taking the H. Lews% the -tsrboard quarter just in front of the forward ees "
+   }
+  ],
+  "\\bWorld War\\b": [
+   {
+    "year": 1887,
+    "title": "Rock Island daily Argus. (Rock Island, Ill.) 1886-1893",
+    "source": "AmericanStories",
+    "ctx": "Sermont. Well, | amt desputin' but it was right. but tole Standnege then, an say so VT, that eff all the liars in the | world war TUX outen it, thar wouldn't be | many folks left\n\nI ~; Az, Io1 ~ Shn fa+a Of Sapphire figuring in sacred history. it had been deeply impressed on her "
+   }
+  ]
+ }
+}

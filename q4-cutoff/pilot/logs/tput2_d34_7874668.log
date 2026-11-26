@@ -1,0 +1,77 @@
+x3104c0s13b0n0:2816203:2816324 [3t COMPLETE
+ connection 0x14b37c005648
+onnected to proxy localRank 1 -> connection 0x1548d40054e0
+ 12 from local rank 1, transport 0
+ 0
+d404005738
+nk 0 -> connection 0x154e38005648
+
+    
+Autodetected device type: cuda
+GPU: NVIDIA A100-SXM4-40GB | Peak FLOPS (BF16): 3.12e+14
+COMPUTE_DTYPE: torch.bfloat16 (auto-detected: CUDA SM 80 (bf16 supported))
+✓ Using Flash Attention 3: efficient, new and awesome.
+Vocab size: 32,768
+Model config:
+{
+  "sequence_len": 2048,
+  "vocab_size": 32768,
+  "n_layer": 34,
+  "n_head": 17,
+  "n_kv_head": 17,
+  "n_embd": 2176,
+  "window_pattern": "SSSL"
+}
+Parameter counts:
+wte                     : 71,303,168
+value_embeds            : 1,212,153,856
+lm_head                 : 71,303,168
+transformer_matrices    : 1,931,873,676
+scalars                 : 94
+total                   : 3,286,633,962
+Estimated FLOPs per token: 1.283459e+10
+Scaling weight decay from 0.280000 to 0.015390 for depth 34
+Scaling the LR for the AdamW parameters ∝1/√(2176/768) = 0.594089
+Using user-provided number of iterations: 25
+Total number of training tokens: 13,107,200
+Tokens : Scaling params ratio: 0.01
+Total training FLOPs estimate: 1.682256e+17
+Tokens / micro-batch / rank: 2 x 2048 = 4,096
+Tokens / micro-batch: 32,768
+Total batch size 524,288 => gradient accumulation steps: 16
+step 00000/00025 (0.00%) | loss: 10.398470 | lrm: 0.03 | dt: 106355.80ms | tok/sec: 4,929 | bf16_mfu: 2.53 | epoch: 1 pq: 0 rg: 8 | total time: 0.00m
+Exception raised from recvBytes at /pytorch/torch/csrc/distributed/c10d/Utils.hpp:682 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) + 0x80 (0x14e574d7cb80 in $WORK/consensus/q4-cutoff/nanochat/.venv/lib/python3.10/site-packages/torch/lib/libc10.so)
+frame #1: <unknown function> + 0x5ffc5b1 (0x14e5580c85b1 in $WORK/consensus/q4-cutoff/nanochat/.venv/lib/python3.10/site-packages/torch/lib/libtorch_cpu.so)
+frame #2: <unknown function> + 0x5ffd9ad (0x14e5580c99ad in $WORK/consensus/q4-cutoff/nanochat/.venv/lib/python3.10/site-packages/torch/lib/libtorch_cpu.so)
+frame #3: <unknown function> + 0x5ffe55a (0x14e5580ca55a in $WORK/consensus/q4-cutoff/nanochat/.venv/lib/python3.10/site-packages/torch/lib/libtorch_cpu.so)
+frame #4: c10d::TCPStore::check(std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > const&) + 0x31e (0x14e5580c527e in $WORK/consensus/q4-cutoff/nanochat/.venv/lib/python3.10/site-packages/torch/lib/libtorch_cpu.so)
+frame #5: c10d::ProcessGroupNCCL::HeartbeatMonitor::runLoop() + 0x3c8 (0x14e516c44868 in $WORK/consensus/q4-cutoff/nanochat/.venv/lib/python3.10/site-packages/torch/lib/libtorch_cuda.so)
+frame #6: <unknown function> + 0xeef64 (0x14e589388f64 in /usr/lib64/libstdc++.so.6)
+frame #7: <unknown function> + 0xa644c (0x14e589c6244c in /lib64/libc.so.6)
+frame #8: <unknown function> + 0x12d898 (0x14e589ce9898 in /lib64/libc.so.6)
+
+Exception raised from recvBytes at /pytorch/torch/csrc/distributed/c10d/Utils.hpp:682 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) + 0x80 (0x154fa476bb80 in $WORK/consensus/q4-cutoff/nanochat/.venv/lib/python3.10/site-packages/torch/lib/libc10.so)
+frame #1: <unknown function> + 0x5ffc5b1 (0x154fe6ac85b1 in $WORK/consensus/q4-cutoff/nanochat/.venv/lib/python3.10/site-packages/torch/lib/libtorch_cpu.so)
+frame #2: <unknown function> + 0x5ffd9ad (0x154fe6ac99ad in $WORK/consensus/q4-cutoff/nanochat/.venv/lib/python3.10/site-packages/torch/lib/libtorch_cpu.so)
+frame #3: <unknown function> + 0x5ffe55a (0x154fe6aca55a in $WORK/consensus/q4-cutoff/nanochat/.venv/lib/python3.10/site-packages/torch/lib/libtorch_cpu.so)
+frame #4: c10d::TCPStore::check(std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > const&) + 0x31e (0x154fe6ac527e in $WORK/consensus/q4-cutoff/nanochat/.venv/lib/python3.10/site-packages/torch/lib/libtorch_cpu.so)
+frame #5: c10d::ProcessGroupNCCL::HeartbeatMonitor::runLoop() + 0x3c8 (0x154fa5644868 in $WORK/consensus/q4-cutoff/nanochat/.venv/lib/python3.10/site-packages/torch/lib/libtorch_cuda.so)
+frame #6: <unknown function> + 0xeef64 (0x155017d34f64 in /usr/lib64/libstdc++.so.6)
+frame #7: <unknown function> + 0xa644c (0x15501860e44c in /lib64/libc.so.6)
+frame #8: <unknown function> + 0x12d898 (0x155018695898 in /lib64/libc.so.6)
+
+Exception raised from recvBytes at /pytorch/torch/csrc/distributed/c10d/Utils.hpp:682 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) + 0x80 (0x14d5ce17cb80 in $WORK/consensus/q4-cutoff/nanochat/.venv/lib/python3.10/site-packages/torch/lib/libc10.so)
+frame #1: <unknown function> + 0x5ffc5b1 (0x14d5b14c85b1 in $WORK/consensus/q4-cutoff/nanochat/.venv/lib/python3.10/site-packages/torch/lib/libtorch_cpu.so)
+frame #2: <unknown function> + 0x5ffd9ad (0x14d5b14c99ad in $WORK/consensus/q4-cutoff/nanochat/.venv/lib/python3.10/site-packages/torch/lib/libtorch_cpu.so)
+frame #3: <unknown function> + 0x5ffe55a (0x14d5b14ca55a in $WORK/consensus/q4-cutoff/nanochat/.venv/lib/python3.10/site-packages/torch/lib/libtorch_cpu.so)
+frame #4: c10d::TCPStore::check(std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > const&) + 0x31e (0x14d5b14c527e in $WORK/consensus/q4-cutoff/nanochat/.venv/lib/python3.10/site-packages/torch/lib/libtorch_cpu.so)
+frame #5: c10d::ProcessGroupNCCL::HeartbeatMonitor::runLoop() + 0x3c8 (0x14d570044868 in $WORK/consensus/q4-cutoff/nanochat/.venv/lib/python3.10/site-packages/torch/lib/libtorch_cuda.so)
+frame #6: <unknown function> + 0xeef64 (0x14d5e2822f64 in /usr/lib64/libstdc++.so.6)
+frame #7: <unknown function> + 0xa644c (0x14d5e30fc44c in /lib64/libc.so.6)
+frame #8: <unknown function> + 0x12d898 (0x14d5e3183898 in /lib64/libc.so.6)
+
+x3104c0s1b0n0.hsn.cm.polaris.alcf.anl.gov: rank 7 exited with code 1
+[rank7]: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 38.00 MiB. GPU 3 has a total capacity of 39.49 GiB of which 35.19 MiB is free. Including non-PyTorch memory, this process has 39.45 GiB memory in use. Of the allocated memory 38.22 GiB is allocated by PyTorch, and 487.27 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

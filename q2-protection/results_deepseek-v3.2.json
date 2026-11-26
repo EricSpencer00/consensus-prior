@@ -1,0 +1,94 @@
+{
+ "deepseek-v3.2": {
+  "n_samples": 1000,
+  "by_cond": {
+   "F0": {
+    "valid_min": 200
+   },
+   "F1": {
+    "valid_min": 200
+   },
+   "N": {
+    "valid_min": 200
+   },
+   "O0": {
+    "valid_min": 200
+   },
+   "O1": {
+    "valid_min": 200
+   }
+  },
+  "parsed_F": {
+   "delta": 0.07,
+   "ci95": [
+    0.005,
+    0.1375
+   ],
+   "n_items": 50,
+   "vs_neutral": 0.0525,
+   "vs_neutral_ci95": [
+    -0.01,
+    0.1125
+   ],
+   "n_items_neutral": 50
+  },
+  "parsed_O": {
+   "delta": 0.005,
+   "ci95": [
+    -0.055,
+    0.0675
+   ],
+   "n_items": 50,
+   "vs_neutral": -0.015,
+   "vs_neutral_ci95": [
+    -0.0575,
+    0.0275
+   ],
+   "n_items_neutral": 50
+  },
+  "parsed_net": {
+   "delta": 0.065,
+   "ci95": [
+    -0.0325,
+    0.16
+   ],
+   "n_items": 50
+  },
+  "valid_min_F": {
+   "delta": 0.07,
+   "ci95": [
+    0.005,
+    0.1375
+   ],
+   "n_items": 50,
+   "vs_neutral": 0.0525,
+   "vs_neutral_ci95": [
+    -0.01,
+    0.1125
+   ],
+   "n_items_neutral": 50
+  },
+  "valid_min_O": {
+   "delta": 0.005,
+   "ci95": [
+    -0.055,
+    0.0675
+   ],
+   "n_items": 50,
+   "vs_neutral": -0.015,
+   "vs_neutral_ci95": [
+    -0.0575,
+    0.0275
+   ],
+   "n_items_neutral": 50
+  },
+  "valid_min_net": {
+   "delta": 0.065,
+   "ci95": [
+    -0.0325,
+    0.16
+   ],
+   "n_items": 50
+  }
+ }
+}

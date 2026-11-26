@@ -1,0 +1,5 @@
+tools/
+tla/states/
+tla/_apalache-out/
+tla/*.log
+lean/.lake/

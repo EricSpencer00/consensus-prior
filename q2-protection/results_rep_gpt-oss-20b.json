@@ -1,0 +1,107 @@
+{
+ "gpt-oss-20b": {
+  "n_samples": 4000,
+  "by_cond": {
+   "F0": {
+    "valid_min": 788,
+    "valid_nonmin": 4,
+    "unparsed": 2,
+    "invalid": 6
+   },
+   "F1": {
+    "valid_min": 792,
+    "invalid": 6,
+    "valid_nonmin": 2
+   },
+   "N": {
+    "valid_min": 786,
+    "invalid": 8,
+    "valid_nonmin": 2,
+    "unparsed": 4
+   },
+   "O0": {
+    "valid_min": 791,
+    "invalid": 4,
+    "unparsed": 1,
+    "valid_nonmin": 4
+   },
+   "O1": {
+    "valid_min": 790,
+    "invalid": 5,
+    "valid_nonmin": 5
+   }
+  },
+  "parsed_F": {
+   "delta": 0.0813,
+   "ci95": [
+    0.0471,
+    0.1158
+   ],
+   "n_items": 200,
+   "vs_neutral": 0.0967,
+   "vs_neutral_ci95": [
+    0.0667,
+    0.1271
+   ],
+   "n_items_neutral": 200
+  },
+  "parsed_O": {
+   "delta": 0.0529,
+   "ci95": [
+    0.0269,
+    0.08
+   ],
+   "n_items": 200,
+   "vs_neutral": 0.066,
+   "vs_neutral_ci95": [
+    0.0429,
+    0.0896
+   ],
+   "n_items_neutral": 200
+  },
+  "parsed_net": {
+   "delta": 0.0283,
+   "ci95": [
+    -0.0117,
+    0.0679
+   ],
+   "n_items": 200
+  },
+  "valid_min_F": {
+   "delta": 0.0806,
+   "ci95": [
+    0.0454,
+    0.1154
+   ],
+   "n_items": 200,
+   "vs_neutral": 0.1008,
+   "vs_neutral_ci95": [
+    0.0708,
+    0.131
+   ],
+   "n_items_neutral": 200
+  },
+  "valid_min_O": {
+   "delta": 0.0537,
+   "ci95": [
+    0.0277,
+    0.0808
+   ],
+   "n_items": 200,
+   "vs_neutral": 0.0725,
+   "vs_neutral_ci95": [
+    0.0496,
+    0.0958
+   ],
+   "n_items_neutral": 200
+  },
+  "valid_min_net": {
+   "delta": 0.0269,
+   "ci95": [
+    -0.0133,
+    0.0679
+   ],
+   "n_items": 200
+  }
+ }
+}

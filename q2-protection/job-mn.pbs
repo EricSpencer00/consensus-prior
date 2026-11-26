@@ -1,0 +1,32 @@
+#!/bin/bash
+#PBS -N q2-mn
+#PBS -A <project>
+#PBS -q by-node
+#PBS -l walltime=08:00:00
+#PBS -l filesystems=home:grand
+#PBS -j oe
+# Multi-node vLLM over Ray. Env: MODEL (hf id), NAME, PP (= node count), EXTRA, TAG, LIMIT.
+set -uo pipefail
+W=$WORK/consensus/q2-protection; cd $W
+V=$WORK/venvs/vllm-034
+export HF_HOME=$WORK/hf-cache HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
+export VLLM_WORKER_MULTIPROC_METHOD=spawn OMP_NUM_THREADS=4 NCCL_IB_DISABLE=0 NCCL_SOCKET_IFNAME=bond0.2245 GLOO_SOCKET_IFNAME=bond0.2245
+ENVS="HF_HOME=$HF_HOME HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 OMP_NUM_THREADS=4 NCCL_IB_DISABLE=0 NCCL_SOCKET_IFNAME=bond0.2245 GLOO_SOCKET_IFNAME=bond0.2245"
+mapfile -t NODES < <(sort -u $PBS_NODEFILE)
+HEAD=${NODES[0]}; HEAD_IP=$(getent hosts $HEAD | awk "{print \$1}" | head -1)
+$V/bin/ray stop --force >/dev/null 2>&1
+$V/bin/ray start --head --temp-dir=/tmp/r${PBS_JOBID%%.*} --node-ip-address=$HEAD_IP --port=6379 --num-gpus=8 --disable-usage-stats
+for n in "${NODES[@]:1}"; do
+  ssh $n "cd $W; env $ENVS $V/bin/ray stop --force >/dev/null 2>&1; env $ENVS $V/bin/ray start --temp-dir=/tmp/r${PBS_JOBID%%.*} --address=$HEAD_IP:6379 --num-gpus=8 --disable-usage-stats" &
+done
+wait
+for i in $(seq 60); do
+  g=$($V/bin/python -c "import ray;ray.init(address=\"auto\",logging_level=40);print(int(ray.cluster_resources().get(\"GPU\",0)))" 2>/dev/null)
+  [ "$g" = "$((8*PP))" ] && break; sleep 5
+done
+echo "ray GPUs: $g, nodes: ${NODES[*]}"
+mkdir -p out
+export RAY_ADDRESS=$HEAD_IP:6379
+$V/bin/python run.py --tp 8 --prompts ${PROMPTS:-prompts.jsonl} --pp $PP --backend ray --model $MODEL --name $NAME --out out/$NAME.${TAG:-full}.jsonl --limit ${LIMIT:-0} $EXTRA || echo "FAILED $NAME"
+for n in "${NODES[@]:1}"; do ssh $n "$V/bin/ray stop --force" >/dev/null 2>&1; done
+$V/bin/ray stop --force >/dev/null 2>&1

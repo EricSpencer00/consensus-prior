@@ -1,0 +1,94 @@
+{
+ "sonnet-5.5": {
+  "n_samples": 1000,
+  "by_cond": {
+   "F0": {
+    "valid_min": 200
+   },
+   "F1": {
+    "valid_min": 200
+   },
+   "N": {
+    "valid_min": 200
+   },
+   "O0": {
+    "valid_min": 200
+   },
+   "O1": {
+    "valid_min": 200
+   }
+  },
+  "parsed_F": {
+   "delta": 0.11,
+   "ci95": [
+    0.01,
+    0.2075
+   ],
+   "n_items": 50,
+   "vs_neutral": 0.0675,
+   "vs_neutral_ci95": [
+    -0.015,
+    0.15
+   ],
+   "n_items_neutral": 50
+  },
+  "parsed_O": {
+   "delta": 0.1875,
+   "ci95": [
+    0.11,
+    0.2725
+   ],
+   "n_items": 50,
+   "vs_neutral": 0.145,
+   "vs_neutral_ci95": [
+    0.085,
+    0.2125
+   ],
+   "n_items_neutral": 50
+  },
+  "parsed_net": {
+   "delta": -0.0775,
+   "ci95": [
+    -0.165,
+    0.0
+   ],
+   "n_items": 50
+  },
+  "valid_min_F": {
+   "delta": 0.11,
+   "ci95": [
+    0.01,
+    0.2075
+   ],
+   "n_items": 50,
+   "vs_neutral": 0.0675,
+   "vs_neutral_ci95": [
+    -0.015,
+    0.15
+   ],
+   "n_items_neutral": 50
+  },
+  "valid_min_O": {
+   "delta": 0.1875,
+   "ci95": [
+    0.11,
+    0.2725
+   ],
+   "n_items": 50,
+   "vs_neutral": 0.145,
+   "vs_neutral_ci95": [
+    0.085,
+    0.2125
+   ],
+   "n_items_neutral": 50
+  },
+  "valid_min_net": {
+   "delta": -0.0775,
+   "ci95": [
+    -0.165,
+    0.0
+   ],
+   "n_items": 50
+  }
+ }
+}

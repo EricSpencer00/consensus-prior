@@ -1,0 +1,24 @@
+# full
+     4878.18 real     26135.11 user      5912.14 sys
+# e0-noop
+real 8.29 user 4.96 sys 8.99 
+# e1-proof
+real 14.38 user 12.94 sys 8.20 
+# e2-revert
+real 14.63 user 13.22 sys 8.37 
+# e3-newlemma
+real 3755.65 user 22762.03 sys 5303.70 
+== e0-noop 16:54:14 load={ 160.38 216.24 241.67 }
+rc=0 built=0 0 real 8.29 user 4.96 sys 8.99 
+117c117
+<   rw [← mul_assoc, mul_comm a, mul_assoc]
+---
+>   rw [← mul_assoc, mul_comm a b, mul_assoc]
+== e1-proof 16:54:23 load={ 158.27 213.99 240.58 }
+rc=0 built=1 1 real 14.38 user 12.94 sys 8.20 
+== e2-revert 16:54:37 load={ 157.28 211.09 239.09 }
+rc=0 built=1 1 real 14.63 user 13.22 sys 8.37 
+== e3-newlemma 16:54:52 load={ 152.73 207.51 237.32 }
+rc=0 built=6840 6840 real 3755.65 user 22762.03 sys 5303.70 
+== e4-revert 17:57:27 load={ 87.70 142.40 158.00 }
+# leanchecker --fresh Mathlib

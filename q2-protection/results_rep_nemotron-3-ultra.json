@@ -1,0 +1,100 @@
+{
+ "nemotron-3-ultra": {
+  "n_samples": 4000,
+  "by_cond": {
+   "F0": {
+    "valid_min": 799,
+    "unparsed": 1
+   },
+   "F1": {
+    "valid_min": 797,
+    "unparsed": 3
+   },
+   "N": {
+    "valid_min": 797,
+    "unparsed": 3
+   },
+   "O0": {
+    "valid_min": 797,
+    "unparsed": 3
+   },
+   "O1": {
+    "valid_min": 799,
+    "unparsed": 1
+   }
+  },
+  "parsed_F": {
+   "delta": 0.0773,
+   "ci95": [
+    0.0373,
+    0.1175
+   ],
+   "n_items": 200,
+   "vs_neutral": 0.0646,
+   "vs_neutral_ci95": [
+    0.0277,
+    0.1021
+   ],
+   "n_items_neutral": 200
+  },
+  "parsed_O": {
+   "delta": 0.0131,
+   "ci95": [
+    -0.0229,
+    0.0512
+   ],
+   "n_items": 200,
+   "vs_neutral": 0.0381,
+   "vs_neutral_ci95": [
+    0.0015,
+    0.0762
+   ],
+   "n_items_neutral": 200
+  },
+  "parsed_net": {
+   "delta": 0.0642,
+   "ci95": [
+    0.0246,
+    0.1044
+   ],
+   "n_items": 200
+  },
+  "valid_min_F": {
+   "delta": 0.0773,
+   "ci95": [
+    0.0373,
+    0.1175
+   ],
+   "n_items": 200,
+   "vs_neutral": 0.0646,
+   "vs_neutral_ci95": [
+    0.0277,
+    0.1021
+   ],
+   "n_items_neutral": 200
+  },
+  "valid_min_O": {
+   "delta": 0.0131,
+   "ci95": [
+    -0.0229,
+    0.0512
+   ],
+   "n_items": 200,
+   "vs_neutral": 0.0381,
+   "vs_neutral_ci95": [
+    0.0015,
+    0.0762
+   ],
+   "n_items_neutral": 200
+  },
+  "valid_min_net": {
+   "delta": 0.0642,
+   "ci95": [
+    0.0246,
+    0.1044
+   ],
+   "n_items": 200
+  },
+  "manifest": "be1ef7f5e384c52db07ba83cd9c0815f7fd3cdc7cce3b39c2bbf7a1cb47f8b7a"
+ }
+}

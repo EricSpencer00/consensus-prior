@@ -1,0 +1,68 @@
+
+    
+Autodetected device type: cuda
+2026-11-21 22:03:16,116 - nanochat.common - [32m[1mINFO[0m - Distributed world size: 4
+GPU: NVIDIA A100-SXM4-40GB | Peak FLOPS (BF16): 3.12e+14
+COMPUTE_DTYPE: torch.bfloat16 (auto-detected: CUDA SM 80 (bf16 supported))
+✓ Using Flash Attention 3: efficient, new and awesome.
+Vocab size: 32,768
+Model config:
+{
+  "sequence_len": 2048,
+  "vocab_size": 32768,
+  "n_layer": 34,
+  "n_head": 17,
+  "n_kv_head": 17,
+  "n_embd": 2176,
+  "window_pattern": "SSSL"
+}
+Parameter counts:
+wte                     : 71,303,168
+value_embeds            : 1,212,153,856
+lm_head                 : 71,303,168
+transformer_matrices    : 1,931,873,676
+scalars                 : 94
+total                   : 3,286,633,962
+Estimated FLOPs per token: 1.283459e+10
+Scaling weight decay from 0.280000 to 0.015390 for depth 34
+Scaling the LR for the AdamW parameters ∝1/√(2176/768) = 0.594089
+Using user-provided number of iterations: 25
+Total number of training tokens: 13,107,200
+Tokens : Scaling params ratio: 0.01
+Total training FLOPs estimate: 1.682256e+17
+Tokens / micro-batch / rank: 1 x 2048 = 2,048
+Tokens / micro-batch: 8,192
+Total batch size 524,288 => gradient accumulation steps: 64
+step 00000/00025 (0.00%) | loss: 10.398738 | lrm: 0.03 | dt: 102250.72ms | tok/sec: 5,127 | bf16_mfu: 5.27 | epoch: 1 pq: 0 rg: 4 | total time: 0.00m
+step 00001/00025 (4.00%) | loss: 10.379674 | lrm: 0.05 | dt: 17317.58ms | tok/sec: 30,274 | bf16_mfu: 31.14 | epoch: 1 pq: 0 rg: 4 | total time: 0.00m
+E1121 22:05:21.983000 3132868 torch/distributed/elastic/multiprocessing/api.py:882] failed (exitcode: 1) local_rank: 3 (pid: 3132956) of binary: $WORK/consensus/q4-cutoff/nanochat/.venv/bin/python
+Traceback (most recent call last):
+  File "$WORK/consensus/q4-cutoff/nanochat/.venv/bin/torchrun", line 10, in <module>
+    sys.exit(main())
+  File "$WORK/consensus/q4-cutoff/nanochat/.venv/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 357, in wrapper
+    return f(*args, **kwargs)
+  File "$WORK/consensus/q4-cutoff/nanochat/.venv/lib/python3.10/site-packages/torch/distributed/run.py", line 936, in main
+    run(args)
+  File "$WORK/consensus/q4-cutoff/nanochat/.venv/lib/python3.10/site-packages/torch/distributed/run.py", line 927, in run
+    elastic_launch(
+  File "$WORK/consensus/q4-cutoff/nanochat/.venv/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 156, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "$WORK/consensus/q4-cutoff/nanochat/.venv/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 293, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+scripts.base_train FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-11-21_22:05:19
+  host      : x3004c0s19b0n0.hsn.cm.polaris.alcf.anl.gov
+  rank      : 3 (local_rank: 3)
+  exitcode  : 1 (pid: 3132956)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================
+[rank0]: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 38.00 MiB. GPU 0 has a total capacity of 39.49 GiB of which 13.19 MiB is free. Including non-PyTorch memory, this process has 39.46 GiB memory in use. Of the allocated memory 37.90 GiB is allocated by PyTorch, and 484.36 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

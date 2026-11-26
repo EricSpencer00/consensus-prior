@@ -1,0 +1,98 @@
+{
+ "mistral-large-4": {
+  "n_samples": 4000,
+  "by_cond": {
+   "F0": {
+    "valid_min": 799,
+    "unparsed": 1
+   },
+   "F1": {
+    "valid_min": 798,
+    "unparsed": 2
+   },
+   "N": {
+    "valid_min": 799,
+    "unparsed": 1
+   },
+   "O0": {
+    "valid_min": 800
+   },
+   "O1": {
+    "valid_min": 800
+   }
+  },
+  "parsed_F": {
+   "delta": 0.1002,
+   "ci95": [
+    0.0683,
+    0.1342
+   ],
+   "n_items": 200,
+   "vs_neutral": 0.1062,
+   "vs_neutral_ci95": [
+    0.075,
+    0.1394
+   ],
+   "n_items_neutral": 200
+  },
+  "parsed_O": {
+   "delta": 0.0806,
+   "ci95": [
+    0.05,
+    0.1131
+   ],
+   "n_items": 200,
+   "vs_neutral": 0.11,
+   "vs_neutral_ci95": [
+    0.0806,
+    0.1412
+   ],
+   "n_items_neutral": 200
+  },
+  "parsed_net": {
+   "delta": 0.0196,
+   "ci95": [
+    -0.0021,
+    0.0415
+   ],
+   "n_items": 200
+  },
+  "valid_min_F": {
+   "delta": 0.1002,
+   "ci95": [
+    0.0683,
+    0.1342
+   ],
+   "n_items": 200,
+   "vs_neutral": 0.1062,
+   "vs_neutral_ci95": [
+    0.075,
+    0.1394
+   ],
+   "n_items_neutral": 200
+  },
+  "valid_min_O": {
+   "delta": 0.0806,
+   "ci95": [
+    0.05,
+    0.1131
+   ],
+   "n_items": 200,
+   "vs_neutral": 0.11,
+   "vs_neutral_ci95": [
+    0.0806,
+    0.1412
+   ],
+   "n_items_neutral": 200
+  },
+  "valid_min_net": {
+   "delta": 0.0196,
+   "ci95": [
+    -0.0021,
+    0.0415
+   ],
+   "n_items": 200
+  },
+  "manifest": "be1ef7f5e384c52db07ba83cd9c0815f7fd3cdc7cce3b39c2bbf7a1cb47f8b7a"
+ }
+}

@@ -1,0 +1,15 @@
+#!/bin/bash
+#PBS -N q2-node
+#PBS -A <project>
+#PBS -q by-node
+#PBS -l select=1
+#PBS -l walltime=10:00:00
+#PBS -l filesystems=home:grand
+#PBS -j oe
+# One node, two job.pbs-style runs side by side on GPUs 0-3 and 4-7 (TP 4 each).
+# Env: A, B (space-separated model names), PA, PB (prompt files), TAGA, TAGB.
+W=$WORK/consensus/q2-protection; cd $W
+run() { CUDA_VISIBLE_DEVICES=$1 MODELS="$2" PROMPTS=$3 TAG=$4 TP=4 bash job.pbs; }
+run 0,1,2,3 "$A" $PA $TAGA > out/node-${PBS_JOBID%%.*}-a.log 2>&1 &
+run 4,5,6,7 "$B" $PB $TAGB > out/node-${PBS_JOBID%%.*}-b.log 2>&1 &
+wait

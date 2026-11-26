@@ -1,0 +1,35 @@
+#!/bin/bash
+#PBS -A <project>
+#PBS -q debug
+#PBS -l select=1:system=polaris
+#PBS -l walltime=01:00:00
+#PBS -l filesystems=home:grand
+#PBS -N q4-tput1
+#PBS -j oe
+#PBS -o $WORK/consensus/q4-cutoff/logs/
+# Q4 throughput pilot, 1 node: tokenizer on pre-1900 sample, then nanochat base_train at d20/d26/d34.
+set -x
+for i in $(seq 3); do [ -s $WORK/consensus/q4-cutoff/scan_shard5.json ] && break; sleep 10; done
+Q4=$WORK/consensus/q4-cutoff
+export http_proxy=http://proxy.alcf.anl.gov:3128 https_proxy=http://proxy.alcf.anl.gov:3128
+export HF_HOME=$Q4/hf OMP_NUM_THREADS=8
+export CC=/usr/bin/gcc-14 CXX=/usr/bin/g++-14  # triton JIT; default PrgEnv cc is nvc
+export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+# Node-local base dir: checkpoints land on local SSD, not project storage.
+LS=/local/scratch; [ -d $LS ] || LS=/tmp
+export NANOCHAT_BASE_DIR=$LS/nc_base_q4
+mkdir -p $NANOCHAT_BASE_DIR && cp -r $Q4/nc_base/base_data_climbmix $NANOCHAT_BASE_DIR/
+cd $Q4/nanochat && source .venv/bin/activate
+nvidia-smi --query-gpu=name,memory.total --format=csv
+if [ -s $Q4/tokenizer_pilot/tokenizer.pkl ]; then mkdir -p $NANOCHAT_BASE_DIR/tokenizer && cp $Q4/tokenizer_pilot/* $NANOCHAT_BASE_DIR/tokenizer/
+else python -m scripts.tok_train --max-chars=1000000000 && mkdir -p $Q4/tokenizer_pilot && cp -r $NANOCHAT_BASE_DIR/tokenizer/* $Q4/tokenizer_pilot/; fi
+run() { # depth iters device_batch
+  torchrun --standalone --nproc_per_node=4 -m scripts.base_train -- --depth=$1 --num-iterations=$2 \
+    --device-batch-size=$3 --total-batch-size=524288 --eval-every=-1 --core-metric-every=-1 \
+    --sample-every=-1 --run=dummy --model-tag=pilot_d$1 2>&1 | grep -v "^W1\|Warning" | tee $Q4/logs/tput1_d$1_$PBS_JOBID.log
+}
+run 20 40 8
+run 26 30 4
+run 34 25 2
+grep -q "^step 00024" $Q4/logs/tput1_d34_$PBS_JOBID.log || run 34 25 1
+echo END $(date)
